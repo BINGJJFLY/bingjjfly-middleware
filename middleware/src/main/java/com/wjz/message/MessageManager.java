@@ -22,7 +22,7 @@ public interface MessageManager<T> {
 	 * @param ciphertext
 	 * @return
 	 */
-	T string2Object(String ciphertext);
+	T string2Object(String ciphertext) throws MessageException;
 	
 	/**
 	 * 加密的字符串转换为DTO对象集合

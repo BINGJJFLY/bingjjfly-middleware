@@ -1,12 +1,14 @@
 package com.wjz.logger;
 
+import org.apache.ibatis.logging.Log;
+
 /**
  * 日志记录服务
  * 
  * @author iss002
  *
  */
-public interface LogService {
+public interface LogService extends Log {
 	
 	String MARKER = "LOGSERVICE";
 
