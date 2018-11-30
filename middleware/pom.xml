@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.wjz</groupId>
-	<artifactId>middleware</artifactId>
+	<artifactId>middlewares</artifactId>
 	<version>1.0.0</version>
 	<packaging>war</packaging>
 
@@ -27,7 +27,7 @@
 		<jpa.version>1.0.0.Final</jpa.version>
 		<validation.version>1.0.0.GA</validation.version>
 		<hibernate.validator.version>4.0.2.GA</hibernate.validator.version>
-		<jackson.version>2.6.4</jackson.version>
+		<jackson.version>2.8.8</jackson.version>
 		<struts2-spring.version>2.3.32</struts2-spring.version>
 		<jetty.version>7.0.0.pre5</jetty.version>
 		<shiro.version>1.4.0</shiro.version>
