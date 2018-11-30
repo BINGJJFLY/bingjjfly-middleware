@@ -30,7 +30,7 @@ public abstract class JsonConverter<T> extends CommonConverter<T> {
 		return objectMapper.writeValueAsString(dtos);
 	}
 	
-	private JavaType getJavaType(Class<?> clazz, Class<T> rawType) {
+	public JavaType getJavaType(Class<?> clazz, Class<T> rawType) {
 		return objectMapper.getTypeFactory().constructParametricType(clazz, rawType);
 	}
 
