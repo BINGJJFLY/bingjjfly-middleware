@@ -13,20 +13,20 @@ public interface Converter<T> {
 	/**
 	 * 字符串转换为DTO对象
 	 * 
-	 * @param plaintext
+	 * @param ciphertext
 	 * @return
 	 * @throws Exception
 	 */
-	T stringConvert2Object(String plaintext) throws Exception;
+	T stringConvert2Object(String ciphertext) throws Exception;
 
 	/**
 	 * 字符串转换为DTO对象集合
 	 * 
-	 * @param plaintext
+	 * @param ciphertext
 	 * @return
 	 * @throws Exception
 	 */
-	Collection<T> stringConvert2Collection(String plaintext) throws Exception;
+	Collection<T> stringConvert2Collection(String ciphertext) throws Exception;
 
 	/**
 	 * DTO对象转换为字符串

@@ -10,14 +10,14 @@ public abstract class JsonConverter<T> extends CommonConverter<T> {
 	private final ObjectMapper objectMapper = new ObjectMapper();
 
 	@Override
-	public T stringConvert2Object(String plaintext) throws Exception {
-		return objectMapper.readValue(plaintext, rawType());
+	public T stringConvert2Object(String ciphertext) throws Exception {
+		return objectMapper.readValue(ciphertext, rawType());
 	}
 
 	@Override
-	public Collection<T> stringConvert2Collection(String plaintext) throws Exception {
+	public Collection<T> stringConvert2Collection(String ciphertext) throws Exception {
 		JavaType javaType = getJavaType(Collection.class, rawType());
-		return objectMapper.readValue(plaintext, javaType);
+		return objectMapper.readValue(ciphertext, javaType);
 	}
 
 	@Override

@@ -26,11 +26,11 @@ public final class ConverterRegistry<T> {
 	}
 
 	public void register(String packageName) {
-		final ResolverUtil<Class<T>> resolver = new ResolverUtil<>();
-		Set<Class<? extends Class<T>>> converterTypes = resolver.findAnnotated(Convertor.class, packageName)
+		final ResolverUtil<Converter<T>> resolver = new ResolverUtil<>();
+		Set<Class<? extends Converter<T>>> converterTypes = resolver.findAnnotated(Convertor.class, packageName)
 				.getClasses();
 		if (!CollectionUtils.isEmpty(converterTypes)) {
-			for (Class<? extends Class<T>> converterType : converterTypes) {
+			for (Class<? extends Converter<T>> converterType : converterTypes) {
 				if (!converterType.isAnonymousClass() && !converterType.isInterface()
 						&& !Modifier.isAbstract(converterType.getModifiers())) {
 					register(converterType);
@@ -40,42 +40,42 @@ public final class ConverterRegistry<T> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void register(Class<? extends Class<T>> converterType) {
+	public void register(Class<? extends Converter<T>> converterType) {
 		if (!existing(converterType)) {
 			Convertor convertorAnno = converterType.getAnnotation(Convertor.class);
 			Class<T> target = (Class<T>) convertorAnno.target();
-			register(target, (Converter<T>) newInstance(target));
+			register(target, newInstance(converterType));
 		}
 	}
 
 	public void register(Class<T> target, Converter<T> instance) {
 		CONVERTOER_MAP.put(target, instance);
 	}
-	
+
 	public Converter<T> getConverter(Class<T> target) {
 		return CONVERTOER_MAP.get(target);
 	}
 
-	private T newInstance(Class<T> target) {
+	private Converter<T> newInstance(Class<? extends Converter<T>> converterType) {
 		try {
-			Constructor<T> constructor = target.getConstructor();
-			return (T) constructor.newInstance();
+			Constructor<? extends Converter<T>> constructor = converterType.getConstructor();
+			return constructor.newInstance();
 		} catch (Exception e) {
 			throw new RegisterException("an exception occurred during initialization", e);
 		}
 	}
 
-	private boolean existing(Class<? extends Class<T>> converterType) {
+	private boolean existing(Class<? extends Converter<T>> converterType) {
 		return CONVERTOER_MAP.containsKey(converterType);
 	}
-	
+
 	public static class RegisterException extends RuntimeException {
 
 		private static final long serialVersionUID = 2108705720088926059L;
-		
+
 		public RegisterException(String message, Throwable cause) {
 			super(message, cause);
 		}
-		
+
 	}
 }
